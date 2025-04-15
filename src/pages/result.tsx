@@ -1,5 +1,7 @@
 // 결과 페이지
+// 건강 상태 체크
 import { useRouter } from "next/router"
+import style from '@/styles/result.module.css'
 
 export default function Home(){
 
@@ -15,10 +17,25 @@ export default function Home(){
 
     return(
         <div>
-            <h1>질병 예측 결과 페이지</h1>
-            <div>ㅇㅇㅇ님의 예측 질병은: </div>
-            <button onClick={onClickHospital}>병원 찾기</button>
-            <button onClick={onClickSupplement}>영양제 찾기</button>
+            <h1 className={style.title}>✅ 건강 상태 check! ✅</h1>
+
+            <div className={style.divider}></div>
+
+            <div className={style.state}>ㅇㅇㅇ님의 건강 상태를 체크합니다. </div>
+
+            <div className={style.divider}></div>
+
+            <h3 className={style.result}>체크 결과</h3>
+
+            <div className={style.resultDescription}>
+                (예시)ㅇㅇㅇ님에겐 혈압 관리가 필요해보여요.
+                <br></br>
+                아래에서 주변 병원과 영양제 정보를 알아보세요.
+            </div>
+
+            <button className={style.hospitalbtn} onClick={onClickHospital}>병원 찾기</button>
+
+            <button className={style.supplementbtn} onClick={onClickSupplement}>영양제 찾기</button>
         </div>
     )
 }

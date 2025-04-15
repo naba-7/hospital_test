@@ -1,0 +1,38 @@
+.title{
+    font-size: 100px;
+    text-align: center;
+}
+
+.description{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.subDescription{
+    font-size: 50px;
+}
+
+.divider{
+    margin-bottom: 50px;
+    height: 1px;
+    background-color: #ccc;
+    width: 100%;
+  }
+
+.startbtn{
+    color: gray;
+    font-family: 'ASSACOMFREEGOTHIC', sans-serif;
+    display: block;
+    margin: 0 auto;
+    font-size: 50px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+
+.startbtn:hover{
+    background-color: aliceblue;
+    color: black;
+}
