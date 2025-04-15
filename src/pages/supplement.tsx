@@ -29,7 +29,7 @@ export default function Home(){
                 <div>*영양제 이름*</div>
                 <div>*영양제 설명*</div>
                 <div className={style.subDescription}>
-                    👇🏻 아래에서 병원 추천도 받아보세요!
+                    👇🏻 아래에서 병원 추천도 받아보세요! 👇🏻
                 </div>
             </div>
 

@@ -30,7 +30,7 @@ export default function Home(){
                 <div>*지도*</div>
                 <div>*병원주소*</div>
                 <div className={style.subDescription}>
-                👇🏻 아래에서 영양제 추천도 받아보세요!
+                👇🏻 아래에서 영양제 추천도 받아보세요! 👇🏻
                 </div>
             </div>
 
