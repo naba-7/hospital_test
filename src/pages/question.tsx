@@ -46,8 +46,13 @@ export default function Home(){
 
             <div>
                 <label>✍🏻현재 상태를 입력하세요</label>
+                <div className={style.example}>
+                    현재 건강 상태 및 주요 증상을 입력해주세요!
+                    <br></br>
+                    (예: 주요 증상, 증상 발생 시기, 만성 질환 유무, 복용중 약물, 흡연 여부, 음주 여부 등 자세히 적어주시면 더 좋아요!)
+                </div>
                 <br></br>
-                <textarea></textarea>
+                <textarea placeholder="위 예시를 보고 현재 상태를 입력하세요"></textarea>
             </div>
 
         </div>
