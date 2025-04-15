@@ -30,8 +30,10 @@ export default function Home(){
             <div className={style.resultDescription}>
                 (예시)ㅇㅇㅇ님에겐 혈압 관리가 필요해보여요.
                 <br></br>
-                아래에서 주변 병원과 영양제 정보를 알아보세요.
+                👇🏻아래에서 주변 병원과 영양제 추천을 받아보세요.
             </div>
+
+            <div className={style.divider}></div>
 
             <button className={style.hospitalbtn} onClick={onClickHospital}>병원 찾기</button>
 

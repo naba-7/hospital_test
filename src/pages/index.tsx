@@ -11,14 +11,14 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1 className={styles.title}>🩺 Healthy-O 🔍</h1>
+        <h1 className={styles.title}>Healthy-O</h1>
         <div className={styles.description}>
           <div className={styles.subDescription}>
-            💪🏻TAKE CARE WITH Healthy - O
+            💪🏻TAKE CARE with Healthy - O
             <br></br>
           </div>
           <br></br>
-          본 서비스는 생성형 AI와 함께하는 건강 상태 체크 프로그램입니다.
+          본 서비스는 생성형 AI와 함께하는 건강 상태 체크 서비스입니다.
           <br></br>
           건강 상태를 체크하고, 병원과 영양제 추천까지 한번에 받아보세요!
           <br></br>

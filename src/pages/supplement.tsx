@@ -1,5 +1,6 @@
 // 영양제 페이지
 import { useRouter } from "next/router"
+import style from '@/styles/supplement.module.css'
 
 export default function Home(){
 
@@ -15,9 +16,27 @@ export default function Home(){
 
     return(
         <div>
-            <h1>영양제 추천 페이지</h1>
-            <button onClick={onClickMain}>메인 페이지로 돌아가기</button>
-            <button onClick={onClickHospital}>병원 추천받기</button>
+            <h1 className={style.title}>영양제 추천 받기</h1>
+
+            <div className={style.divider}></div>
+
+            <div className={style.state}>ㅇㅇㅇ님의 건강 상태를 기반으로 영양제를 추천합니다.</div>
+
+            <div className={style.divider}></div>
+
+            <div className={style.resultDescription}>
+                <div>*영양제*를 추천합니다!</div>
+                <div>*영양제 이름*</div>
+                <div>*영양제 설명*</div>
+                <div className={style.subDescription}>
+                    👇🏻 아래에서 병원 추천도 받아보세요!
+                </div>
+            </div>
+
+            <div className={style.divider}></div>
+
+            <button className={style.hospitalbtn} onClick={onClickHospital}>병원 추천받기</button>
+            <button className={style.mainbtn} onClick={onClickMain}>메인 페이지로 돌아가기</button>
         </div>
     )
 }

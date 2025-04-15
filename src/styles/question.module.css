@@ -40,19 +40,20 @@
   }
 
 .questbtn{
-    color: gray;
-    font-family: 'ASSACOMFREEGOTHIC', sans-serif;
-    display: block;
-    margin: 0 auto;
-    font-size: 50px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 50px;
-    margin-top: 50px;
+  color: gray;
+  font-family: 'ASSACOMFREEGOTHIC', sans-serif;
+  display: block;
+  margin: 0 auto;
+  font-size: 50px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border-color: #ccc;
+  cursor: pointer;
+  margin-bottom: 50px;
 }
 
 .questbtn:hover{
     background-color: aliceblue;
+    border-color: black;
     color: black;
 }
