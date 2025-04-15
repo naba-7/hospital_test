@@ -16,7 +16,7 @@ export default function Home(){
 
     return(
         <div>
-            <h1 className={style.title}>영양제 추천 받기</h1>
+            <h1 className={style.title}>💊 영양제 추천 받기 💊</h1>
 
             <div className={style.divider}></div>
 

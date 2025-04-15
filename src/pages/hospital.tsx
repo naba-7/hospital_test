@@ -15,7 +15,7 @@ export default function Home(){
     
     return(
         <div>
-            <h1 className={style.title}>주변 병원 찾기</h1>
+            <h1 className={style.title}>💉 주변 병원 찾기 🏥</h1>
 
             <div className={style.divider}></div>
 
