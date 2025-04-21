@@ -1,4 +1,4 @@
-.container{
+.container {
   background-color: white;
   max-width: 1000px;
   min-height: 100vh;
@@ -10,24 +10,43 @@
   padding: 0px 15px;
 }
 
-
-.divider{
+.divider {
   height: 1px;
   background-color: #ccc;
   width: 100%;
 }
 
-.main{
+.main {
   flex: 1;
   padding-bottom: 2rem;
 }
 
-.container header{
+/* 🔧 헤더 스타일 전체 */
+.headerWrapper {
+  background-color: aliceblue;
+  display: flex;
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center;
   height: 60px;
+  padding: 0 20px;
+}
+
+/* 🔧 좌측 로고 (헬시오 프로젝트) */
+.container header {
   font-weight: bold;
   font-size: 18px;
   line-height: 60px;
-  background-color: aliceblue;
+  cursor: pointer;
+}
+
+/* 🔧 우측 버튼 (로그인 / 회원가입) */
+.login,
+.signup {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 60px;
+  margin-left: 20px;
+  display: inline-block;
 }
 
 .container footer {
