@@ -15,6 +15,26 @@ export default function Home(){
         router.push('/result');
     }
 
+  // 🧠 입력값 저장
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [status, setStatus] = useState('');
+
+  const onSubmit = () => {
+    // 확인용 콘솔 출력
+    console.log({
+      name,
+      age,
+      gender,
+      status
+    });
+
+    // 추후 백엔드로 데이터 전달하는 로직 추가 예정
+
+    router.push('/result');
+  };
+
     return(
         <div>
             <h1 className={style.title}>
