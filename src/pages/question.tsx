@@ -21,17 +21,23 @@ export default function Home(){
   const [gender, setGender] = useState('');
   const [status, setStatus] = useState('');
 
-  const onSubmit = () => {
-    // 확인용 콘솔 출력
-    console.log({
-      name,
-      age,
-      gender,
-      status
+  const onSubmit = async () => {
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      
+      body: JSON.stringify({
+        name,
+        age,
+        gender,
+        status
+      })
     });
-
-    // 추후 백엔드로 데이터 전달하는 로직 추가 예정
-
+  
+    const data = await response.json();
+    
     router.push('/result');
   };
 
