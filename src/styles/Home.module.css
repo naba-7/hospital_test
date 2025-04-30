@@ -56,3 +56,11 @@
   background-color: #f8f8f8;
   text-align: center;
 }
+
+.logout {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 60px;
+  margin-left: 20px;
+  display: inline-block;
+}

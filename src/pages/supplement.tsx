@@ -1,10 +1,29 @@
 // 영양제 페이지
 import { useRouter } from "next/router"
+import { useEffect, useState } from "react";
 import style from '@/styles/supplement.module.css'
 
 export default function Home(){
 
     const router = useRouter();
+    const [isAuth, setIsAuth] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("로그인이 필요한 서비스입니다.");
+          router.push("/login");
+        } 
+        else{
+            setIsAuth(true);
+        }
+        setLoading(false);
+      }, []);
+
+      if(loading) return null;
+
+      if(!isAuth) return null;
 
     const onClickMain = () => {
         router.push('/');
