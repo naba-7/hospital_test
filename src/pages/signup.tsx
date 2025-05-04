@@ -50,7 +50,9 @@ export default function SignupPage() {
     if (form.password1 !== form.password2)
       newErrors.password1 = newErrors.password2 =
         "비밀번호가 일치하지 않습니다.";
-    if (!form.location) newErrors.location = "번호를 입력해 주세요.";
+    if (phone1.length !== 3 || phone2.length !== 4 || phone3.length !== 4) {
+      newErrors.location = "전화번호를 올바르게 입력해 주세요.";
+    }
     if (!form.gender) newErrors.gender = "성별을 선택해 주세요.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
