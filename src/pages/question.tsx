@@ -22,18 +22,14 @@ export default function Home(){
   const [status, setStatus] = useState('');
 
   const onSubmit = async () => {
+    // 백엔드 주소 fetch('~~/api/submit')
     const response = await fetch('/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      
-      body: JSON.stringify({
-        name,
-        age,
-        gender,
-        status
-      })
+
+      body: JSON.stringify({ name, age, gender, status })
     });
   
     const data = await response.json();

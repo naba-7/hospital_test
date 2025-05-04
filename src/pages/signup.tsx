@@ -56,9 +56,29 @@ export default function SignupPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (validateForm()) {
-      alert("Healthy-O 가입을 축하합니다.");
+      try {
+        const response = await fetch('/api/signup', { //백엔드 주소 입력란 '~/api/singup'
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: form.email,
+            name: form.writer,
+            password: form.password1,
+            phone: `${phone1}-${phone2}-${phone3}`,
+            gender: form.gender
+          })
+        });
+  
+        const data = await response.json();
+        alert(data.message || "Healthy-O 가입을 축하합니다.");
+      } catch (error) {
+        alert("회원가입 중 문제가 발생했습니다.");
+        console.error(error);
+      }
     }
   };
 
