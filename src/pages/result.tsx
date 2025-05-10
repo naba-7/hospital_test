@@ -28,9 +28,9 @@ export default function Home(){
             <h3 className={style.result}>체크 결과</h3>
 
             <div className={style.resultDescription}>
-                ㅇㅇㅇ님에겐 혈압 관리가 필요해보여요.
+                ㅇㅇㅇ님에겐 ooo가 필요해보여요.
                 <br></br>
-                👇🏻 아래에서 주변 병원과 영양제 추천을 받아보세요! 👇🏻
+                👇🏻 로그인하고, 아래에서 주변 병원과 영양제 추천을 받아보세요! 👇🏻
             </div>
 
             <div className={style.divider}></div>
