@@ -15,7 +15,8 @@ export default function HospitalPage() {
   const [filteredHospitals, setFilteredHospitals] = useState([]);
   const [directionsLine, setDirectionsLine] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [activeInfoWindow, setActiveInfoWindow] = useState(null); // ✅ 추가
+  const [activeInfoWindow, setActiveInfoWindow] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // 로그인 상태
 
   const mockHospitals = [
     { name: '광주내과의원', lat: 35.1595454, lng: 126.8526012, address: '광주 서구 상무대로 983', department: '내과' },
@@ -23,6 +24,15 @@ export default function HospitalPage() {
     { name: '웃는치과', lat: 35.157519, lng: 126.853203, address: '광주 서구 시청로 12', department: '치과' },
     { name: '하나내과의원', lat: 35.160109, lng: 126.849504, address: '광주 서구 상무중앙로 75', department: '내과' },
   ];
+
+  // ✅ 로그인 상태 확인
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setIsAuthenticated(false);
+      router.push('/login');
+    }
+  }, []);
 
   const getDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371;
@@ -33,14 +43,16 @@ export default function HospitalPage() {
   };
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     fetch('/api/recommendation')
       .then(res => res.json())
       .then(data => setRecommendedDepartment(data.recommended_department))
       .catch(err => console.error('추천진료과 fetch 실패:', err));
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    if (!recommendedDepartment || mapLoaded) return;
+    if (!recommendedDepartment || mapLoaded || !isAuthenticated) return;
 
     const script = document.createElement('script');
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false`;
@@ -85,14 +97,14 @@ export default function HospitalPage() {
       });
     };
     document.head.appendChild(script);
-  }, [recommendedDepartment, mapLoaded]);
+  }, [recommendedDepartment, mapLoaded, isAuthenticated]);
 
   const drawRoute = (lat, lng, name) => {
     if (!map || !userLocation) return;
 
     if (directionsLine) directionsLine.setMap(null);
     if (selectedMarker) selectedMarker.setMap(null);
-    if (activeInfoWindow) activeInfoWindow.close(); // ✅ 이전 InfoWindow 닫기
+    if (activeInfoWindow) activeInfoWindow.close();
 
     const userLatLng = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
     const hospitalLatLng = new window.kakao.maps.LatLng(lat, lng);
@@ -107,7 +119,7 @@ export default function HospitalPage() {
       content: `<div style="padding:5px;font-size:14px;">${name}</div>`
     });
     info.open(map, marker);
-    setActiveInfoWindow(info); // ✅ 현재 InfoWindow 저장
+    setActiveInfoWindow(info);
 
     const path = [userLatLng, hospitalLatLng];
 
@@ -129,6 +141,8 @@ export default function HospitalPage() {
     bounds.extend(new window.kakao.maps.LatLng(paddedHospitalLat, hospitalLatLng.getLng()));
     map.setBounds(bounds);
   };
+
+  if (!isAuthenticated) return null;
 
   return (
     <div>
