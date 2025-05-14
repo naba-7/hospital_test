@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 import styles from '@/styles/index.module.css'
 
 export default function Home() {
@@ -11,7 +12,11 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1 className={styles.title}>Healthy-O</h1>
+
+        <div className={styles.title}>
+          <Image src="/testlogo.png" alt="Healthy-O 로고" width={700} height={150} />
+        </div>
+
         <div className={styles.description}>
           <div className={styles.subDescription}>
             💪🏻TAKE CARE with Healthy - O

@@ -61,9 +61,9 @@
 }
 
 .supplementbtn:hover{
-    background-color: aliceblue;
+    background-color: #104023;
     border-color: black;
-    color: black;
+    color: white;
 }
 
 
@@ -82,7 +82,7 @@
 }
 
 .mainbtn:hover{
-    background-color: aliceblue;
+    background-color: #104023;
     border-color: black;
-    color: black;
+    color: white;
 }
