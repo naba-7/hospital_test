@@ -75,7 +75,7 @@ export default function DisclaimerPage() {
         <br></br>
         발생하는 피해에 본 서비스는 책임을 지지 않는 것 외 위 사항을 제대로 숙지하였다면 
         <br></br>
-        서비스 이용을 위해 아래 입력창에  <span style={{ color: "red", fontSize: "27px"}}>'동의합니다'</span>  를 정확히 입력해 주세요.
+        서비스 이용을 위해 아래 입력창에  <span style={{ color: "red", fontSize: "27px"}}>동의합니다</span>  를 정확히 입력해 주세요.
       </p>
 
       <input

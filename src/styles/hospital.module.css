@@ -41,6 +41,32 @@
     margin-top: 2rem;
 }
 
+.map {
+  width: 100%;
+  height: 400px;
+  margin: 1rem 0;
+}
+
+.hospitalList {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.hospitalItem {
+  margin-bottom: 0.5rem;
+}
+
+.routeButton {
+  margin-left: 10px;
+  padding: 3px 8px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 
 .supplementbtn{
     color: gray;

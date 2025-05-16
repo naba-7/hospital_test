@@ -1,5 +1,3 @@
-// 결과 페이지
-// 건강 상태 체크
 import { useRouter } from "next/router"
 import style from '@/styles/result.module.css'
 import { useEffect, useState } from "react";
@@ -20,7 +18,7 @@ export default function Home(){
             setIsConsent(true);
         }
         setLoading(false);
-    }, []);
+    }, [router]);
 
     if (loading || !isConsent) return null;
 
