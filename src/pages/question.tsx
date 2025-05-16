@@ -18,7 +18,7 @@ export default function Home() {
   const [status, setStatus] = useState('');
 
   const onSubmit = async () => {
-    const response = await fetch('/api/question', {
+    const response = await fetch('/api/question', {   //json파일 보낼 백엔드주소 입력
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

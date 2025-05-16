@@ -12,122 +12,44 @@ export default function HospitalPage() {
   const [recommendedDepartment, setRecommendedDepartment] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [map, setMap] = useState(null);
+  const [hospitals, setHospitals] = useState([]);
   const [filteredHospitals, setFilteredHospitals] = useState([]);
   const [directionsLine, setDirectionsLine] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [activeInfoWindow, setActiveInfoWindow] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // 로그인 상태
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const mockHospitals = [
-  {
-    name: '상무드림내과의원',
-    department: '내과',
-    address: '광주 서구 상무중앙로 95 2층 201, 202호',
-    lat: 35.1531,
-    lng: 126.8482,
-  },
-  {
-    name: '상무우리내과의원',
-    department: '내과',
-    address: '광주 서구 상무중앙로 57 2층',
-    lat: 35.1525,
-    lng: 126.8479,
-  },
-  {
-    name: '양내과의원',
-    department: '내과',
-    address: '광주 서구 상무대로 936',
-    lat: 35.1512,
-    lng: 126.8467,
-  },
-  {
-    name: '가슴뛰는내과의원',
-    department: '내과',
-    address: '광주 서구 마륵복개로 91 DY빌딩 2층 201호',
-    lat: 35.1498,
-    lng: 126.8453,
-  },
-  {
-    name: '모든내과의원',
-    department: '내과',
-    address: '광주 남구 봉선로 12 4,5층',
-    lat: 35.1345,
-    lng: 126.9021,
-  },
-  {
-    name: '첨단우덕수내과의원',
-    department: '내과',
-    address: '광주 광산구 첨단중앙로182번길 28 2층',
-    lat: 35.2301,
-    lng: 126.8432,
-  },
-  {
-    name: '상무수치과의원',
-    department: '치과',
-    address: '광주 서구 마륵복개로 91 DY빌딩 2층 202호',
-    lat: 35.1499,
-    lng: 126.8454,
-  },
-  {
-    name: '치우치과의원 상무점',
-    department: '치과',
-    address: '광주 서구 상무자유로 180 대선빌딩 2-3층',
-    lat: 35.1515,
-    lng: 126.8471,
-  },
-  {
-    name: '예인원치과병원',
-    department: '치과',
-    address: '광주 서구 상무공원로 7 4층,5층',
-    lat: 35.1508,
-    lng: 126.8463,
-  },
-  {
-    name: '세움치과의원',
-    department: '치과',
-    address: '광주 서구 상무중앙로 101 차스타워 신관 5층 502호',
-    lat: 35.1533,
-    lng: 126.8485,
-  },
-  {
-    name: '구구치과의원',
-    department: '치과',
-    address: '광주 북구 동문대로 109 4층',
-    lat: 35.1742,
-    lng: 126.9123,
-  },
-];
-
-
-
-  // ✅ 로그인 상태 확인
+  // 로그인 체크
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       setIsAuthenticated(false);
+      alert('로그인 시 이용 가능한 기능입니다.');
       router.push('/login');
     }
   }, []);
 
-  const getDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  };
-
+  // 추천진료과 받아오기
   useEffect(() => {
     if (!isAuthenticated) return;
-
-    fetch('/api/recommendation')
+    fetch('/mock_recommendation.json')
       .then(res => res.json())
       .then(data => setRecommendedDepartment(data.recommended_department))
       .catch(err => console.error('추천진료과 fetch 실패:', err));
   }, [isAuthenticated]);
 
+  // 병원 데이터 받아오기
   useEffect(() => {
-    if (!recommendedDepartment || mapLoaded || !isAuthenticated) return;
+    if (!isAuthenticated) return;
+    fetch('/mock_hospitals.json')
+      .then(res => res.json())
+      .then(data => setHospitals(data))
+      .catch(err => console.error('병원 데이터 fetch 실패:', err));
+  }, [isAuthenticated]);
+
+  // 지도 로딩
+  useEffect(() => {
+    if (!recommendedDepartment || mapLoaded || hospitals.length === 0 || !isAuthenticated) return;
 
     const script = document.createElement('script');
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false`;
@@ -162,21 +84,32 @@ export default function HospitalPage() {
           });
           userInfo.open(mapObj, userMarker);
 
-          const filtered = mockHospitals.filter(h =>
-            h.department === recommendedDepartment && getDistance(lat, lng, h.lat, h.lng) <= 3
+          const nearby = hospitals.filter(h =>
+            h.department === recommendedDepartment &&
+            getDistance(lat, lng, h.lat, h.lng) <= 3
           );
 
-          setFilteredHospitals(filtered);
+          setFilteredHospitals(nearby);
           setMapLoaded(true);
         });
       });
     };
     document.head.appendChild(script);
-  }, [recommendedDepartment, mapLoaded, isAuthenticated]);
+  }, [recommendedDepartment, hospitals, mapLoaded, isAuthenticated]);
+
+  const getDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(lat1 * Math.PI / 180) *
+              Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  };
 
   const drawRoute = (lat, lng, name) => {
     if (!map || !userLocation) return;
-
     if (directionsLine) directionsLine.setMap(null);
     if (selectedMarker) selectedMarker.setMap(null);
     if (activeInfoWindow) activeInfoWindow.close();
@@ -212,8 +145,7 @@ export default function HospitalPage() {
     const bounds = new window.kakao.maps.LatLngBounds();
     bounds.extend(userLatLng);
     bounds.extend(hospitalLatLng);
-    const paddedHospitalLat = hospitalLatLng.getLat() + 0.002;
-    bounds.extend(new window.kakao.maps.LatLng(paddedHospitalLat, hospitalLatLng.getLng()));
+    bounds.extend(new window.kakao.maps.LatLng(hospitalLatLng.getLat() + 0.002, hospitalLatLng.getLng()));
     map.setBounds(bounds);
   };
 
