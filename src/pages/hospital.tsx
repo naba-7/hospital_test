@@ -86,7 +86,7 @@ export default function HospitalPage() {
 
           const nearby = hospitals.filter(h =>
             h.department === recommendedDepartment &&
-            getDistance(lat, lng, h.lat, h.lng) <= 3
+            getDistance(lat, lng, h.lat, h.lng) <= 3    // 사용자와 병원 거리 제한 3km
           );
 
           setFilteredHospitals(nearby);
@@ -97,6 +97,7 @@ export default function HospitalPage() {
     document.head.appendChild(script);
   }, [recommendedDepartment, hospitals, mapLoaded, isAuthenticated]);
 
+  // 임시작성 (사용자와 병원 간 거리측정)
   const getDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
