@@ -1,26 +1,31 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 import styles from '@/styles/index.module.css'
 
 export default function Home() {
   const router = useRouter();
 
   const onSubmit = () => {
-    router.push('/question');
+    router.push('/disclaimer');
   }
 
   return (
     <>
       <div>
-        <h1 className={styles.title}>Healthy-O</h1>
+
+        <div className={styles.title}>
+          <Image src="/testlogo.png" alt="Healthy-O 로고" width={700} height={150} />
+        </div>
+
         <div className={styles.description}>
           <div className={styles.subDescription}>
             💪🏻TAKE CARE with Healthy - O
             <br></br>
           </div>
           <br></br>
-          본 서비스는 생성형 AI와 함께하는 건강 상태 체크 서비스입니다.
+          본 서비스는 생성형 AI와 함께하는 건강 정보 통합 검색 서비스입니다.
           <br></br>
-          건강 상태를 체크하고, 병원과 영양제 추천까지 한번에 받아보세요!
+          검색 결과를 통해 여러 건강 지식을 쌓아보세요!
           <br></br>
           <br></br>
           건강을 위한 첫 걸음!
